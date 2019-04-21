@@ -8,17 +8,30 @@ import android.util.Log;
 import com.celsius.mom.SplashActivity;
 import com.celsius.mom.api.interfaces.GetCountryCodeDataService;
 import com.celsius.mom.api.manager.ApiManager;
+import com.celsius.mom.application.MomApplication;
 import com.celsius.mom.pojos.IpApiResponce;
+
+import java.time.Month;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Callbacks implements Application.ActivityLifecycleCallbacks {
+
+    @Inject
+    ApiManager apiManagerInstance;
+
+
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+        MomApplication.getMyComponent().inject(this);
+
         if(activity instanceof SplashActivity){
-            GetCountryCodeDataService service = ApiManager.getCountryCodeRetrofitInstance().create(GetCountryCodeDataService.class);
+            GetCountryCodeDataService service = apiManagerInstance.retrofit.create(GetCountryCodeDataService.class);
             Call<IpApiResponce> call = service.getIpApiResponce();
             call.enqueue(new Callback<IpApiResponce>() {
 

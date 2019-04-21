@@ -1,8 +1,6 @@
 package com.celsius.mom.application;
 
 import android.app.Application;
-import android.os.Handler;
-
 import com.celsius.mom.callbacks.Callbacks;
 import com.celsius.mom.dagger.interfaces.DaggerMomComponents;
 import com.celsius.mom.dagger.interfaces.MomComponents;
