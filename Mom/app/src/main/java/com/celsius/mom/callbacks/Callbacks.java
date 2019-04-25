@@ -12,6 +12,7 @@ import com.celsius.mom.api.manager.ApiManager;
 import com.celsius.mom.application.MomApplication;
 import com.celsius.mom.pojos.CountriesDataResponce;
 import com.celsius.mom.pojos.CurrentCountryResponce;
+import com.celsius.mom.room.repository.MomDataBaseRepository;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
     @Inject
     ApiManager apiManagerInstance;
 
+
+    @Inject
+    MomDataBaseRepository momDataBaseRepository;
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 @Override
                 public void onResponse(Call<CurrentCountryResponce> call, Response<CurrentCountryResponce> response) {
                     Log.e("test","1");
-
+                    momDataBaseRepository.inserdCurrentCountryEntity(response.body().getCountryCode());
                 }
 
                 @Override

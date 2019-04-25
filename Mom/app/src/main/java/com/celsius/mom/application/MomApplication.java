@@ -1,10 +1,13 @@
 package com.celsius.mom.application;
 
 import android.app.Application;
+
 import com.celsius.mom.callbacks.Callbacks;
 import com.celsius.mom.dagger.interfaces.DaggerMomComponents;
 import com.celsius.mom.dagger.interfaces.MomComponents;
 import com.celsius.mom.dagger.modules.ContextModule;
+import com.celsius.mom.dagger.modules.MomDataBaseRepositoryModule;
+import com.celsius.mom.room.repository.MomDataBaseRepository;
 
 public class MomApplication extends Application {
 
@@ -13,10 +16,12 @@ public class MomApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         registerActivityLifecycleCallbacks(new Callbacks());
 
         component = DaggerMomComponents.builder()
                 .contextModule(new ContextModule(getApplicationContext()))
+                .momDataBaseRepositoryModule(new MomDataBaseRepositoryModule(new MomDataBaseRepository(getApplicationContext())))
                 .build();
     }
 
