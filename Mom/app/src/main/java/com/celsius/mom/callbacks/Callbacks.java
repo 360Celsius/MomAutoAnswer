@@ -9,9 +9,9 @@ import com.celsius.mom.SplashActivity;
 import com.celsius.mom.api.interfaces.GetCountryCodeDataService;
 import com.celsius.mom.api.manager.ApiManager;
 import com.celsius.mom.application.MomApplication;
-import com.celsius.mom.pojos.IpApiResponce;
+import com.celsius.mom.pojos.CountriesDataResponce;
 
-import java.time.Month;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,31 +32,17 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
 
         if(activity instanceof SplashActivity){
             GetCountryCodeDataService service = apiManagerInstance.retrofit.create(GetCountryCodeDataService.class);
-            Call<IpApiResponce> call = service.getIpApiResponce();
-            call.enqueue(new Callback<IpApiResponce>() {
+            Call<List<CountriesDataResponce>> call = service.getCountriesDataResponce();
+            call.enqueue(new Callback<List<CountriesDataResponce>>() {
 
                 @Override
-                public void onResponse(Call<IpApiResponce> call, Response<IpApiResponce> response) {
+                public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {
                     Log.e("test","1");
-                    Log.e("test",response.body().getAs());
-                    Log.e("test",response.body().getCity());
-                    Log.e("test",response.body().getCountry());
-                    Log.e("test",response.body().getCountryCode());
-                    Log.e("test",response.body().getIsp());
-                    Log.e("test",response.body().getLat());
-                    Log.e("test",response.body().getLon());
-                    Log.e("test",response.body().getOrg());
-                    Log.e("test",response.body().getQuery());
-                    Log.e("test",response.body().getRegion());
-                    Log.e("test",response.body().getRegion());
-                    Log.e("test",response.body().getStatus());
-                    Log.e("test",response.body().getTimezone());
-                    Log.e("test",response.body().getZip());
 
                 }
 
                 @Override
-                public void onFailure(Call<IpApiResponce> call, Throwable t) {
+                public void onFailure(Call<List<CountriesDataResponce>> call, Throwable t) {
                     Log.e("test","1");
                 }
             });

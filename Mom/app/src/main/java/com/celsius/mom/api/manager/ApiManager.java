@@ -16,7 +16,7 @@ public class ApiManager {
     @Inject
     public ApiManager(){
         retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl(BaseUrls.BASE_URL_COUNTRY_CODE)
+                .baseUrl(BaseUrls.BASE_URL_COUNTRIES_DATA)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
