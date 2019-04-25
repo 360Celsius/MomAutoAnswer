@@ -39,7 +39,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
         if(activity instanceof SplashActivity){
 
 
-            GetCurrentCountryDataService serviceCurrentCountryData = apiManagerInstance.retrofitCurrentCountryData.create(GetCurrentCountryDataService.class);
+            GetCurrentCountryDataService serviceCurrentCountryData = apiManagerInstance.getRetrofitCurrentCountryData().create(GetCurrentCountryDataService.class);
             Call<CurrentCountryResponce> callCurrentCountryData = serviceCurrentCountryData.getCurrentCountryDataService();
             callCurrentCountryData.enqueue(new Callback<CurrentCountryResponce>() {
 
@@ -47,6 +47,22 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 public void onResponse(Call<CurrentCountryResponce> call, Response<CurrentCountryResponce> response) {
                     Log.e("test","1");
                     momDataBaseRepository.inserdCurrentCountryEntity(response.body().getCountryCode());
+
+                    GetCountriesDataService serviceCountriesDataService  = apiManagerInstance.getRetrofitCountriesData().create(GetCountriesDataService.class);
+                    Call<List<CountriesDataResponce>> callCountriesDataService  = serviceCountriesDataService.getCountriesDataResponce();
+                    callCountriesDataService.enqueue(new Callback<List<CountriesDataResponce>>() {
+
+                        @Override
+                        public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {
+                            Log.e("test","1");
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<CountriesDataResponce>> call, Throwable t) {
+                            Log.e("test","1");
+                        }
+                    });
                 }
 
                 @Override
@@ -56,21 +72,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
             });
 
 
-            GetCountriesDataService serviceCountriesDataService  = apiManagerInstance.retrofitCountriesData.create(GetCountriesDataService.class);
-            Call<List<CountriesDataResponce>> callCountriesDataService  = serviceCountriesDataService.getCountriesDataResponce();
-            callCountriesDataService.enqueue(new Callback<List<CountriesDataResponce>>() {
 
-                @Override
-                public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {
-                    Log.e("test","1");
-
-                }
-
-                @Override
-                public void onFailure(Call<List<CountriesDataResponce>> call, Throwable t) {
-                    Log.e("test","1");
-                }
-            });
         }
     }
 

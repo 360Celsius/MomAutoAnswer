@@ -26,6 +26,8 @@ public class MomDataBaseRepository {
         momDataBase = Room.databaseBuilder(context, MomDataBase.class, DB_NAME).build();
     }
 
+
+    //============================= Current Country Data ===========================================
     public void inserdCurrentCountryEntity(String currentCountryName){
         CurrentCountryEntity currentCountryEntity = new CurrentCountryEntity();
         currentCountryEntity.setCurrentCountryName(currentCountryName);
@@ -99,6 +101,8 @@ public class MomDataBaseRepository {
     public LiveData<List<CurrentCountryEntity>> getTasks() {
         return momDataBase.daoCurrentCountryAccess().fetchAllTasks();
     }
+
+    //============================= ALL Countries Data ===========================================
 
 
 }

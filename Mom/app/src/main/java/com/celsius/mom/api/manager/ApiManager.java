@@ -12,9 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Singleton
 public class ApiManager {
 
-    public Retrofit retrofitCountriesData;
-    public Retrofit retrofitCurrentCountryData;
-    OkHttpClient okHttpClient;
+    private Retrofit retrofitCountriesData;
+    private Retrofit retrofitCurrentCountryData;
+    private OkHttpClient okHttpClient;
 
 
     @Inject
@@ -36,4 +36,15 @@ public class ApiManager {
                 .build();
     }
 
+    public Retrofit getRetrofitCountriesData() {
+        return retrofitCountriesData;
+    }
+
+    public Retrofit getRetrofitCurrentCountryData() {
+        return retrofitCurrentCountryData;
+    }
+
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
 }
