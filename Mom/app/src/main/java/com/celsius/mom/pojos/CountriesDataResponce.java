@@ -7,33 +7,45 @@ import java.util.List;
 
 public class CountriesDataResponce {
 
-    @SerializedName("name")
+    @SerializedName("alpha2Code")
     @Expose
-    String name;
+    String alpha2Code;
 
-    @SerializedName("topLevelDomain")
+    @SerializedName("flag")
     @Expose
-    List<String> topLevelDomain;
+    String flag;
 
+    @SerializedName("callingCodes")
+    @Expose
+    List<String> callingCodes;
 
-    public CountriesDataResponce(String name,List<String> topLevelDomain) {
-        this.name = name;
-        this.topLevelDomain = topLevelDomain;
+    public CountriesDataResponce(String alpha2Code, String flag, List<String> callingCodes) {
+        this.alpha2Code = alpha2Code;
+        this.flag = flag;
+        this.callingCodes = callingCodes;
     }
 
-    public String getName() {
-        return name;
+    public String getAlpha2Code() {
+        return alpha2Code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
     }
 
-    public List<String> getTopLevelDomain() {
-        return topLevelDomain;
+    public String getFlag() {
+        return flag;
     }
 
-    public void setTopLevelDomain(List<String> topLevelDomain) {
-        this.topLevelDomain = topLevelDomain;
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public List<String> getCallingCodes() {
+        return callingCodes;
+    }
+
+    public void setCallingCodes(List<String> callingCodes) {
+        this.callingCodes = callingCodes;
     }
 }
