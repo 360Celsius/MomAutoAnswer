@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.celsius.mom.SplashActivity;
-import com.celsius.mom.api.interfaces.GetCountryCodeDataService;
+import com.celsius.mom.api.interfaces.GetCountriesDataService;
+import com.celsius.mom.api.interfaces.GetCurrentCountryDataService;
 import com.celsius.mom.api.manager.ApiManager;
 import com.celsius.mom.application.MomApplication;
 import com.celsius.mom.pojos.CountriesDataResponce;
+import com.celsius.mom.pojos.CurrentCountryResponce;
 
 import java.util.List;
 
@@ -31,9 +33,28 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
         MomApplication.getMyComponent().inject(this);
 
         if(activity instanceof SplashActivity){
-            GetCountryCodeDataService service = apiManagerInstance.retrofit.create(GetCountryCodeDataService.class);
-            Call<List<CountriesDataResponce>> call = service.getCountriesDataResponce();
-            call.enqueue(new Callback<List<CountriesDataResponce>>() {
+
+
+            GetCurrentCountryDataService serviceCurrentCountryData = apiManagerInstance.retrofitCountriesData.create(GetCurrentCountryDataService.class);
+            Call<CurrentCountryResponce> callCurrentCountryData = serviceCurrentCountryData.getCurrentCountryDataService();
+            callCurrentCountryData.enqueue(new Callback<CurrentCountryResponce>() {
+
+                @Override
+                public void onResponse(Call<CurrentCountryResponce> call, Response<CurrentCountryResponce> response) {
+                    Log.e("test","1");
+
+                }
+
+                @Override
+                public void onFailure(Call<CurrentCountryResponce> call, Throwable t) {
+                    Log.e("test","1");
+                }
+            });
+
+
+            GetCountriesDataService serviceCountriesDataService  = apiManagerInstance.retrofitCountriesData.create(GetCountriesDataService.class);
+            Call<List<CountriesDataResponce>> callCountriesDataService  = serviceCountriesDataService.getCountriesDataResponce();
+            callCountriesDataService.enqueue(new Callback<List<CountriesDataResponce>>() {
 
                 @Override
                 public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {

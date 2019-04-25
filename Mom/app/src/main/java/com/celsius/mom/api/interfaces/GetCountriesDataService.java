@@ -8,7 +8,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface GetCountryCodeDataService {
+public interface GetCountriesDataService {
     @GET(EndPoints.COUNTRIES_DATA)
     Call<List<CountriesDataResponce>> getCountriesDataResponce();
 }
