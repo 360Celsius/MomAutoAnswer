@@ -35,7 +35,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
         if(activity instanceof SplashActivity){
 
 
-            GetCurrentCountryDataService serviceCurrentCountryData = apiManagerInstance.retrofitCountriesData.create(GetCurrentCountryDataService.class);
+            GetCurrentCountryDataService serviceCurrentCountryData = apiManagerInstance.retrofitCurrentCountryData.create(GetCurrentCountryDataService.class);
             Call<CurrentCountryResponce> callCurrentCountryData = serviceCurrentCountryData.getCurrentCountryDataService();
             callCurrentCountryData.enqueue(new Callback<CurrentCountryResponce>() {
 
