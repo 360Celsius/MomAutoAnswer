@@ -69,11 +69,11 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {
                     Log.e("test","2");
 
-                    for(int i=0; i<response.body().size(); i++){
-                        Log.e("test","3");
-//                        momDataBaseRepository.insertAllCountriesEntity(response.body().get(i).getAlpha2Code(),
-//                                response.body().get(i).getFlag(),response.body().get(i).getCallingCodes().get(0));
-                    }
+//                    for(int i=0; i<response.body().size(); i++){
+//                        Log.e("test","3");
+////                        momDataBaseRepository.insertAllCountriesEntity(response.body().get(i).getAlpha2Code(),
+////                                response.body().get(i).getFlag(),response.body().get(i).getCallingCodes().get(0));
+//                    }
 
                 }
 
