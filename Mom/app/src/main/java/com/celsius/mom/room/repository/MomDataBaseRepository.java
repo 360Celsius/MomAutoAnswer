@@ -60,7 +60,7 @@ public class MomDataBaseRepository {
 
     @SuppressLint("StaticFieldLeak")
     private void deleteCurrentCountryEntity(final int id) {
-        final LiveData<CurrentCountryEntity> task = getTaskCurrentCountryEntity(id);
+        final LiveData<CurrentCountryEntity> task = getCurrentCountryEntity(id);
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -83,11 +83,11 @@ public class MomDataBaseRepository {
         }.execute();
     }
 
-    public LiveData<CurrentCountryEntity> getTaskCurrentCountryEntity(int id) {
+    public LiveData<CurrentCountryEntity> getCurrentCountryEntity(int id) {
         return momDataBase.daoCurrentCountryAccess().getCurrentCountry(id);
     }
 
-    public LiveData<List<CurrentCountryEntity>> getTasksCurrentCountryEntity() {
+    public LiveData<List<CurrentCountryEntity>> getCurrentCountryEntity() {
         return momDataBase.daoCurrentCountryAccess().fetchAllCurrentCountry();
     }
 
