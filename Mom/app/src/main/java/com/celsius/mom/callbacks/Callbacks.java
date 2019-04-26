@@ -46,7 +46,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 @Override
                 public void onResponse(Call<CurrentCountryResponce> call, Response<CurrentCountryResponce> response) {
                     Log.e("test","1");
-                    momDataBaseRepository.inserdCurrentCountryEntity(response.body().getCountryCode());
+                    momDataBaseRepository.insertCurrentCountryEntity(response.body().getCountryCode());
 
                     GetCountriesDataService serviceCountriesDataService  = apiManagerInstance.getRetrofitCountriesData().create(GetCountriesDataService.class);
                     Call<List<CountriesDataResponce>> callCountriesDataService  = serviceCountriesDataService.getCountriesDataResponce();
@@ -55,7 +55,8 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                         @Override
                         public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {
                             Log.e("test","1");
-
+                            momDataBaseRepository.insertAllCountriesEntity(response.body().get(0).getAlpha2Code(),
+                                    response.body().get(0).getFlag(),response.body().get(0).getCallingCodes().get(0));
                         }
 
                         @Override

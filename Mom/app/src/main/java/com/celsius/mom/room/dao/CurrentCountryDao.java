@@ -24,10 +24,10 @@ public interface CurrentCountryDao {
     public void delete(CurrentCountryEntity currentCountryEntity);
 
     @Query("SELECT * FROM currentcountry")
-    LiveData<List<CurrentCountryEntity>> fetchAllTasks();
+    LiveData<List<CurrentCountryEntity>> fetchAllCurrentCountry();
 
 
-    @Query("SELECT * FROM currentcountry WHERE mId =:taskId")
-    LiveData<CurrentCountryEntity> getTask(int taskId);
+    @Query("SELECT * FROM currentcountry WHERE mId_currentcountry =:taskId")
+    LiveData<CurrentCountryEntity> getCurrentCountry(int taskId);
 
 }

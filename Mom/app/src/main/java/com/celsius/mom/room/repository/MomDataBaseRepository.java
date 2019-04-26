@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
 import com.celsius.mom.room.db.MomDataBase;
+import com.celsius.mom.room.entities.AllCountriesDataEntity;
 import com.celsius.mom.room.entities.CurrentCountryEntity;
 
 import java.util.List;
@@ -23,12 +24,13 @@ public class MomDataBaseRepository {
 
     @Inject
     public MomDataBaseRepository(Context context) {
-        momDataBase = Room.databaseBuilder(context, MomDataBase.class, DB_NAME).build();
+        momDataBase = Room.databaseBuilder(context, MomDataBase.class, DB_NAME)
+                .fallbackToDestructiveMigration().build();
     }
 
 
     //============================= Current Country Data ===========================================
-    public void inserdCurrentCountryEntity(String currentCountryName){
+    public void insertCurrentCountryEntity(String currentCountryName){
         CurrentCountryEntity currentCountryEntity = new CurrentCountryEntity();
         currentCountryEntity.setCurrentCountryName(currentCountryName);
         insertCurrentCountryEntity(currentCountryEntity);
@@ -58,7 +60,7 @@ public class MomDataBaseRepository {
 
     @SuppressLint("StaticFieldLeak")
     private void deleteCurrentCountryEntity(final int id) {
-        final LiveData<CurrentCountryEntity> task = getTask(id);
+        final LiveData<CurrentCountryEntity> task = getTaskCurrentCountryEntity(id);
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -67,19 +69,6 @@ public class MomDataBaseRepository {
                 return null;
             }
         }.execute();
-    }
-
-    public void deleteTask(final int id) {
-        final LiveData<CurrentCountryEntity> task = getTask(id);
-        if(task != null) {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    momDataBase.daoCurrentCountryAccess().delete(task.getValue());
-                    return null;
-                }
-            }.execute();
-        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -94,15 +83,76 @@ public class MomDataBaseRepository {
         }.execute();
     }
 
-    public LiveData<CurrentCountryEntity> getTask(int id) {
-        return momDataBase.daoCurrentCountryAccess().getTask(id);
+    public LiveData<CurrentCountryEntity> getTaskCurrentCountryEntity(int id) {
+        return momDataBase.daoCurrentCountryAccess().getCurrentCountry(id);
     }
 
-    public LiveData<List<CurrentCountryEntity>> getTasks() {
-        return momDataBase.daoCurrentCountryAccess().fetchAllTasks();
+    public LiveData<List<CurrentCountryEntity>> getTasksCurrentCountryEntity() {
+        return momDataBase.daoCurrentCountryAccess().fetchAllCurrentCountry();
     }
 
     //============================= ALL Countries Data ===========================================
 
+    public void insertAllCountriesEntity(String alpha2Code,String flag,String callingCodes){
+        AllCountriesDataEntity allCountriesDataEntity = new AllCountriesDataEntity();
+        allCountriesDataEntity.setAlpha2Code(alpha2Code);
+        allCountriesDataEntity.setFlag(flag);
+        allCountriesDataEntity.setCallingCodes(callingCodes);
+        insertAllCountriesEntity(allCountriesDataEntity);
+    }
 
+    @SuppressLint("StaticFieldLeak")
+    private void insertAllCountriesEntity(final AllCountriesDataEntity allCountriesDataEntity) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                momDataBase.daoAllCountriesDaoAccess().insert(allCountriesDataEntity);
+                return null;
+            }
+        }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void updateAllCountriesDataEntityEntity(final AllCountriesDataEntity allCountriesDataEntity) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                momDataBase.daoAllCountriesDaoAccess().update(allCountriesDataEntity);
+                return null;
+            }
+        }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void deleteAllCountriesDataEntityEntity(final int id) {
+        final LiveData<AllCountriesDataEntity> task = getAllCountriesEntity(id);
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                momDataBase.daoAllCountriesDaoAccess().delete(task.getValue());
+                return null;
+            }
+        }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void deleteAllCountriesEntity(final AllCountriesDataEntity allCountriesDataEntity) {
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                momDataBase.daoAllCountriesDaoAccess().delete(allCountriesDataEntity);
+                return null;
+            }
+        }.execute();
+    }
+
+    public LiveData<AllCountriesDataEntity> getAllCountriesEntity(int id) {
+        return momDataBase.daoAllCountriesDaoAccess().getAllCountries(id);
+    }
+
+    public LiveData<List<AllCountriesDataEntity>> getAllCountriesEntity() {
+        return momDataBase.daoAllCountriesDaoAccess().fetchAllCountries();
+    }
 }
