@@ -3,16 +3,12 @@ package com.celsius.mom.room.repository;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
-
 import com.celsius.mom.room.db.MomDataBase;
 import com.celsius.mom.room.entities.AllCountriesDataEntity;
 import com.celsius.mom.room.entities.CurrentCountryEntity;
-
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

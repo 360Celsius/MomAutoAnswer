@@ -2,15 +2,17 @@ package com.celsius.mom.room.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "currentcountry")
+@Entity(tableName = "currentcountry", indices = {@Index(value = "currentcountryname", unique = true)} )
 public class CurrentCountryEntity {
 
     @ColumnInfo(name = "currentcountryname")
     private String currentCountryName;
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "mId_currentcountry")
     private int mId_currentcountry;
 
     public String getCurrentCountryName() {

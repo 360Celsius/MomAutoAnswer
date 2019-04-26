@@ -2,9 +2,10 @@ package com.celsius.mom.room.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "allcountriesdata")
+@Entity(tableName = "allcountriesdata", indices = {@Index(value = "alpha2Code", unique = true)} )
 public class AllCountriesDataEntity {
 
     @ColumnInfo(name = "alpha2Code")
@@ -17,6 +18,7 @@ public class AllCountriesDataEntity {
     private String callingCodes;
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "mId_allcountriesdata")
     private int mId_allcountriesdata;
 
     public String getAlpha2Code() {
