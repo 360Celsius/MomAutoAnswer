@@ -3,7 +3,10 @@ package com.celsius.mom;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.celsius.mom.databinding.ActivityMainBinding;
+import com.celsius.mom.fragments.AutoMessageFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -15,6 +18,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_view_placeholder, new AutoMessageFragment(), AutoMessageFragment.TAG);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
     }
 
