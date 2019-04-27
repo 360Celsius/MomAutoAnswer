@@ -65,7 +65,16 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 @Override
                 public Object apply(Object[] objects) throws Exception {
                     // Objects[] is an array of combined results of completed requests
-                    Log.e("test","1");
+                    momDataBaseRepository.insertCurrentCountryEntity(((CurrentCountryResponce) objects[0]).getCountryCode());
+
+                    for(int i=0; i < ((ArrayList) objects[1]).size() ; i++){
+                        momDataBaseRepository.insertAllCountriesEntity(
+                                ((CountriesDataResponce) ((ArrayList) objects[1]).get(i)).getAlpha2Code(),
+                                ((CountriesDataResponce) ((ArrayList) objects[1]).get(i)).getFlag(),
+                                ((CountriesDataResponce) ((ArrayList) objects[1]).get(i)).getCallingCodes().get(0));
+                    }
+
+
                     return new Object();
                 }
                 // After all requests had been performed the next observer will receive the Object, returned from Function
@@ -76,13 +85,13 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
 
                 @Override
                 public void accept(Object o) throws Exception {
-                    Log.e("test","2");
+
                 }
 
             }, new Consumer<Throwable>() { // Will be triggered if any error during requests will happen
                 @Override
                 public void accept(Throwable throwable) throws Exception {
-                    Log.e("test","3");
+
                 }
             });
         }
