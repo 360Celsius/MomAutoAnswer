@@ -72,6 +72,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                                 ((CountriesDataResponce) ((ArrayList) objects[1]).get(i)).getAlpha2Code(),
                                 ((CountriesDataResponce) ((ArrayList) objects[1]).get(i)).getFlag(),
                                 ((CountriesDataResponce) ((ArrayList) objects[1]).get(i)).getCallingCodes().get(0));
+
                     }
 
 
@@ -85,13 +86,13 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
 
                 @Override
                 public void accept(Object o) throws Exception {
-
+                    Log.e("test","Will be triggered if all requests will end successfully");
                 }
 
             }, new Consumer<Throwable>() { // Will be triggered if any error during requests will happen
                 @Override
                 public void accept(Throwable throwable) throws Exception {
-
+                    Log.e("test","Will be triggered if any error during requests will happen");
                 }
             });
         }
