@@ -70,9 +70,9 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 }
                 // After all requests had been performed the next observer will receive the Object, returned from Function
             })
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new Consumer<Object>() {  // Will be triggered if all requests will end successfully
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(new Consumer<Object>() {  // Will be triggered if all requests will end successfully
 
                 @Override
                 public void accept(Object o) throws Exception {
