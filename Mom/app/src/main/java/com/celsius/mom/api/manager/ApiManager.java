@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Singleton
@@ -25,6 +26,7 @@ public class ApiManager {
         retrofitCountriesData = new retrofit2.Retrofit.Builder()
                 .baseUrl(BaseUrls.BASE_URL_COUNTRIES_DATA)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
 
@@ -32,6 +34,7 @@ public class ApiManager {
         retrofitCurrentCountryData = new retrofit2.Retrofit.Builder()
                 .baseUrl(BaseUrls.BASE_URL_CURRENT_COUNTRY_DATA)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
     }

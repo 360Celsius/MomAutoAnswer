@@ -6,10 +6,11 @@ import com.celsius.mom.pojos.CurrentCountryResponce;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface GetCurrentCountryDataService {
     @GET(EndPoints.CURENT_COUNTRY_DATA)
-    Call<CurrentCountryResponce> getCurrentCountryDataService();
+    Observable<CurrentCountryResponce> getCurrentCountryDataService();
 }

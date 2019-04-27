@@ -1,5 +1,6 @@
 package com.celsius.mom.callbacks;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
@@ -18,10 +19,16 @@ import com.celsius.mom.pojos.CurrentCountryResponce;
 import com.celsius.mom.room.entities.CurrentCountryEntity;
 import com.celsius.mom.room.repository.MomDataBaseRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,6 +42,7 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
     @Inject
     MomDataBaseRepository momDataBaseRepository;
 
+    @SuppressLint("CheckResult")
     @Override
     public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
 
@@ -44,44 +52,39 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
 
 
             GetCurrentCountryDataService serviceCurrentCountryData = apiManagerInstance.getRetrofitCurrentCountryData().create(GetCurrentCountryDataService.class);
-            Call<CurrentCountryResponce> callCurrentCountryData = serviceCurrentCountryData.getCurrentCountryDataService();
-            callCurrentCountryData.enqueue(new Callback<CurrentCountryResponce>() {
-
-                @Override
-                public void onResponse(Call<CurrentCountryResponce> call, Response<CurrentCountryResponce> response) {
-                    Log.e("test","1");
-                    momDataBaseRepository.insertCurrentCountryEntity(response.body().getCountryCode());
-
-
-                }
-
-                @Override
-                public void onFailure(Call<CurrentCountryResponce> call, Throwable t) {
-                    Log.e("test","1");
-                }
-            });
-
             GetCountriesDataService serviceCountriesDataService  = apiManagerInstance.getRetrofitCountriesData().create(GetCountriesDataService.class);
-            Call<List<CountriesDataResponce>> callCountriesDataService  = serviceCountriesDataService.getCountriesDataResponce();
-            callCountriesDataService.enqueue(new Callback<List<CountriesDataResponce>>() {
+
+            List<Observable<?>> requests = new ArrayList<>();
+
+            // Make a collection of all requests to call at once
+            requests.add(serviceCurrentCountryData.getCurrentCountryDataService());
+            requests.add(serviceCountriesDataService.getCountriesDataResponce());
+
+            // Zipping all requests with the Function, which will receive the results.
+            Observable.zip(requests, new Function<Object[], Object>() {
+                @Override
+                public Object apply(Object[] objects) throws Exception {
+                    // Objects[] is an array of combined results of completed requests
+                    Log.e("test","1");
+                    return new Object();
+                }
+                // After all requests had been performed the next observer will receive the Object, returned from Function
+            })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Consumer<Object>() {  // Will be triggered if all requests will end successfully
 
                 @Override
-                public void onResponse(Call<List<CountriesDataResponce>> call, Response<List<CountriesDataResponce>> response) {
+                public void accept(Object o) throws Exception {
                     Log.e("test","2");
-
-                    for(int i=0; i<response.body().size(); i++){
-                        Log.e("test","3");
-                        momDataBaseRepository.insertAllCountriesEntity(response.body().get(i).getAlpha2Code(),response.body().get(i).getFlag(),response.body().get(i).getCallingCodes().get(0));
-                    }
-
                 }
 
+            }, new Consumer<Throwable>() { // Will be triggered if any error during requests will happen
                 @Override
-                public void onFailure(Call<List<CountriesDataResponce>> call, Throwable t) {
-                    Log.e("test","1");
+                public void accept(Throwable throwable) throws Exception {
+                    Log.e("test","3");
                 }
             });
-
         }
     }
 
