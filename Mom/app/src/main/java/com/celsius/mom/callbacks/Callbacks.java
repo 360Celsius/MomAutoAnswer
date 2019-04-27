@@ -3,12 +3,14 @@ package com.celsius.mom.callbacks;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
+import com.celsius.mom.MainActivity;
 import com.celsius.mom.SplashActivity;
 import com.celsius.mom.api.interfaces.GetCountriesDataService;
 import com.celsius.mom.api.interfaces.GetCurrentCountryDataService;
@@ -87,12 +89,16 @@ public class Callbacks implements Application.ActivityLifecycleCallbacks {
                 @Override
                 public void accept(Object o) throws Exception {
                     Log.e("test","Will be triggered if all requests will end successfully");
+//                    Intent intentone = new Intent(context.getApplicationContext(), MainActivity.class);
+//                    context.startActivity(intentone);
                 }
 
             }, new Consumer<Throwable>() { // Will be triggered if any error during requests will happen
                 @Override
                 public void accept(Throwable throwable) throws Exception {
                     Log.e("test","Will be triggered if any error during requests will happen");
+//                    Intent intentone = new Intent(context.getApplicationContext(), MainActivity.class);
+//                    context.startActivity(intentone);
                 }
             });
         }
