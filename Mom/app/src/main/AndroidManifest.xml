@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.celsius.mom">
 
-    <!--Internet Permission-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.MomApplication"
@@ -25,6 +29,20 @@
         <activity android:name=".MainActivity" android:screenOrientation="portrait">
 
         </activity>
+
+        <service
+            android:name=".services.IncomingPushNotificationService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+
+            <intent-filter>
+
+                <action android:name="android.service.notification.NotificationListenerService" />
+
+            </intent-filter>
+
+        </service>
+
     </application>
 
 </manifest>
