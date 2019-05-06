@@ -11,9 +11,9 @@ import androidx.databinding.DataBindingUtil;
 import com.celsius.mom.R;
 import com.celsius.mom.databinding.ErrorFragmentBinding;
 
-public class ErrorFragment extends BaseFragment {
+public class ListOfAutoMessagesFragment extends BaseFragment {
 
-    public final static String TAG = "ErrorFragment";
+    public final static String TAG = "ListOfAutoMessagesFragment";
     private View view;
     private ErrorFragmentBinding binding;
 
@@ -21,7 +21,7 @@ public class ErrorFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.error_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.list_of_auto_messages_fragment, container, false);
         view = binding.getRoot();
 
         return view;
