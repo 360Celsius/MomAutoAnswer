@@ -4,18 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-
 import com.celsius.mom.R;
-import com.celsius.mom.databinding.ErrorFragmentBinding;
+import com.celsius.mom.databinding.ListOfAutoMessagesFragmentBinding;
 
 public class ListOfAutoMessagesFragment extends BaseFragment {
 
     public final static String TAG = "ListOfAutoMessagesFragment";
     private View view;
-    private ErrorFragmentBinding binding;
+    private ListOfAutoMessagesFragmentBinding binding;
 
     @Nullable
     @Override

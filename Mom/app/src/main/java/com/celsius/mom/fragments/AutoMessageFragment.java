@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil;
 
 import com.celsius.mom.R;
 import com.celsius.mom.databinding.AutoMessageFragmentBinding;
-import com.celsius.mom.databinding.ErrorFragmentBinding;
 
 public class AutoMessageFragment extends BaseFragment {
 
