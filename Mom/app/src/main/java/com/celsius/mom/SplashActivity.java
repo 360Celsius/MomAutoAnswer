@@ -95,9 +95,7 @@ public class SplashActivity extends BaseActivity {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.e("test", "Will be triggered if any error during requests will happen");
-                        Intent intentone = new Intent(getApplicationContext(), MainActivity.class);
-                        intentone.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intentone);
+
                     }
                 });
     }
