@@ -4,26 +4,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.celsius.mom.databinding.ActivityMainBinding;
-import com.celsius.mom.fragments.AutoMessageFragment;
 import com.celsius.mom.fragments.ListOfAutoMessagesFragment;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding activityMainBinding;
     private Menu menu;
-    private Toolbar mToolbar;
-    private FloatingActionButton fab;
-    private AppBarLayout mAppBarLayout;
     private FragmentTransaction transaction;
 
     @Override
@@ -32,12 +24,14 @@ public class MainActivity extends BaseActivity {
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(activityMainBinding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_spalsh_logo);
+
+
+        activityMainBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -45,22 +39,27 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+
+        activityMainBinding.appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = false;
             int scrollRange = -1;
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
                 if (scrollRange == -1) {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
                     isShow = true;
                     showOption(R.id.action_info);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
                 } else if (isShow) {
                     isShow = false;
                     hideOption(R.id.action_info);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
                 }
             }
         });
@@ -89,9 +88,7 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_info) {
+        if (id == R.id.action_info) {
             return true;
         }
 
