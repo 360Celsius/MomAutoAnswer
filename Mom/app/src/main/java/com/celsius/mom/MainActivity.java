@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_spalsh_logo);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_m__tool_bar_logo);
 
 
         activityMainBinding.fab.setOnClickListener(new View.OnClickListener() {
