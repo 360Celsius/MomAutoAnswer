@@ -13,10 +13,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/phone_field"
+            android:layout_marginTop="48dp"
+            android:layout_marginLeft="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hone_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+972"/>
+
+            <TextView
+                android:id="@+id/hone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="543129184"/>
+
+        </LinearLayout>
+
         <TextView
+            android:id="@+id/incomint_text"
+            android:layout_below="@+id/phone_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Auto Massage fragment" />
+            android:text="Incoming message test"
+            android:padding="12dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/rounded_rectangle_incoming_text_shape"/>
+
+        <TextView
+            android:id="@+id/outgoing_text"
+            android:layout_below="@+id/incomint_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outgoing message test"
+            android:padding="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/rounded_rectangle_outgoing_text_shape"/>
 
     </RelativeLayout>
 </layout>
