@@ -40,10 +40,25 @@
                     app:layout_collapseParallaxMultiplier="0.7">
 
                     <ImageView
+                        android:id="@+id/logo_auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/logo_message"
+                        android:src="@drawable/ic_colapsable_tool_bar_auto"/>
+
+                    <ImageView
+                        android:id="@+id/logo_message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_spalsh_logo"/>
+                        android:src="@drawable/ic_colapsable_tool_bar_message"/>
+
+                    <ImageView
+                        android:id="@+id/logo_auto_sender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/logo_message"
+                        android:src="@drawable/ic_colapsable_tool_bar_sender"/>
 
                 </RelativeLayout>
 
