@@ -9,7 +9,7 @@
         android:orderInCategory="200"
         android:title="add auto message"
         app:showAsAction="always"
-        android:icon="@drawable/ic_add"/>
+        android:icon="@drawable/ic_check"/>
 
 
 

@@ -7,5 +7,6 @@
 
     <color name="splash_screen_color">#E16E79</color>
     <color name="notification_bar_color">#E16E79</color>
+    <color name="fab_button_bg_color">#eeadb4</color>
 
 </resources>

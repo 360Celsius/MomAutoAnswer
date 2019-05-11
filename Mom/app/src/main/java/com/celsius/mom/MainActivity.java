@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
 import com.celsius.mom.databinding.ActivityMainBinding;
+import com.celsius.mom.fragments.AutoMessageFragment;
 import com.celsius.mom.fragments.ListOfAutoMessagesFragment;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
@@ -65,11 +66,14 @@ public class MainActivity extends BaseActivity {
         });
 
         transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_view_placeholder, new ListOfAutoMessagesFragment(), ListOfAutoMessagesFragment.TAG);
+        transaction.replace(R.id.fragment_view_placeholder, new AutoMessageFragment(), AutoMessageFragment.TAG);
         transaction.addToBackStack(null);
         transaction.commit();
 
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
