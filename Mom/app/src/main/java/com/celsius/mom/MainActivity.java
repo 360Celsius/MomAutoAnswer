@@ -21,7 +21,10 @@ public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding activityMainBinding;
     private Menu menu;
-
+    private Toolbar mToolbar;
+    private FloatingActionButton fab;
+    private AppBarLayout mAppBarLayout;
+    private FragmentTransaction transaction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,11 +32,11 @@ public class MainActivity extends BaseActivity {
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = false;
             int scrollRange = -1;
@@ -62,7 +65,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_view_placeholder, new ListOfAutoMessagesFragment(), ListOfAutoMessagesFragment.TAG);
         transaction.addToBackStack(null);
         transaction.commit();
