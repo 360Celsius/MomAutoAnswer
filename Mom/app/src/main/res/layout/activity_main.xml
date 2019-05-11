@@ -43,6 +43,7 @@
                         android:id="@+id/logo_auto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
                         android:layout_toLeftOf="@+id/logo_message"
                         android:src="@drawable/ic_colapsable_tool_bar_auto"/>
 
@@ -51,12 +52,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="24dp"
                         android:src="@drawable/ic_colapsable_tool_bar_message"/>
 
                     <ImageView
                         android:id="@+id/logo_auto_sender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
                         android:layout_toRightOf="@+id/logo_message"
                         android:src="@drawable/ic_colapsable_tool_bar_sender"/>
 
